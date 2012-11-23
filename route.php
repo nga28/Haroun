@@ -6,6 +6,7 @@
  */
 require_once 'controllers/Controller.php';
 
+
 if(isset($_GET['page'])) {
     $page = $_GET['page'];
     $page .= "Controller";
@@ -38,8 +39,30 @@ if(isset($_GET['page'])) {
                 echo "Mot de passes differents";
                 break;
             case 2 :
-                echo $controller->verificationInscription();
+                if($controller->verificationInscription() == 1) {
+
+                } else if ($controller->verificationInscription() == 0) {
+                    echo "Vous etes deja inscris";
+                } else {
+                   echo "Erreur lors de l'inscription, veuillez reessayer"; 
+                }      
                 break;
+        }
+        break;
+    case 'SondageController' :
+        $controller->creerSondage();
+        if($controller->verificationChamps() == 0) {
+            echo "Veuillez entrer un nom de sondage";
+        } else if($controller->verificationChamps() == 1){
+            $controller->enregistrerSondage();
+        }
+        break;
+    case 'MesSondagesController' : 
+        echo $controller->getMesSondages();
+        break;
+    case 'QuestionsController' :
+        if(isset($_REQUEST['tab'])) {
+            $controller->sendQuestions($_REQUEST['tab']);
         }
         break;
     case 'DefaultController' :

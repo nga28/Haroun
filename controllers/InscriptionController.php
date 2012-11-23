@@ -12,6 +12,7 @@
  */
 require_once 'models/Membres.php';
 require_once 'models/User.php';
+require_once 'controllers/Controller.php';
 
 class InscriptionController extends Controller{
     //put your code here
@@ -41,7 +42,8 @@ class InscriptionController extends Controller{
     }
     
     public function verificationInscription() {
-        $user = new User($this->getCnx(),$_SERVER["REMOTE_ADDR"]);
+        $cnx = parent::getCnx();
+        $user = new User($cnx,true,$_SERVER["REMOTE_ADDR"]);
         //INSCRIPTION DANS LA TABLE USER
         $user->ajouterUser();
         //INSCRIPTION DANS LA TABLE MEMBRE
@@ -55,8 +57,15 @@ class InscriptionController extends Controller{
         $cp = $_POST['cp'];
         $ville = $_POST['ville'];
         $qualite = "FO";
-        $membre = new Membres($mail, $mdp, $this->getCnx(),$id, $ip, $nom, $prenom, $adresse, $cp, $ville, $qualite);
-        $membre->ajouterMembre();
+        $membre = new Membres($mail, $mdp, $id, $ip, $nom, $prenom, $adresse, $cp, $ville, $qualite);
+        if($membre->authentification($cnx) == FALSE)
+            if($membre->ajouterMembre($cnx)) {
+                return 1;
+            } else {
+                return -1;
+            }
+        else
+            return 0;
     }
 }
 

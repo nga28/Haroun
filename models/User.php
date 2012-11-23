@@ -16,9 +16,11 @@ class User {
     protected $id;
     protected $cnx;
     
-    function __construct($cnx = "", $ip = "") {
+    function __construct($cnx, $verif = false, $ip = "") {
         $this->ip = $ip;
         $this->cnx = $cnx;
+        if($verif == true)
+            $this->id = $this->getNewID();
     }
     
     public function getIp() {
@@ -49,7 +51,7 @@ class User {
     public function ajouterUser() {
         $requete = "INSERT INTO user (ID_USER,IP) VALUES (?,?)";
         $cmd = $this->cnx->prepare($requete);
-        $cmd->bindValue(1, $this->getNewID(), PDO::PARAM_INT);
+        $cmd->bindValue(1, $this->id, PDO::PARAM_INT);
         $cmd->bindValue(2, $this->ip, PDO::PARAM_STR);
         if($cmd->execute())
             return true;

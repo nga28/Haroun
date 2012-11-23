@@ -11,6 +11,7 @@
  * @author Naïm Attoumane
  */
 require_once 'models/Membres.php';
+require_once 'models/User.php';
 require_once 'models/Connexion.php';
 require_once 'Controller.php';
 
@@ -38,7 +39,7 @@ class AuthentificationController extends Controller{
     
     public function verificationLogin() {
         $membres = new Membres($_POST['mail'], $_POST['mdp']);
-        $resultat = $membres->authentification($this->getCnx());
+        $resultat = $membres->authentification(parent::getCnx());
         if($resultat != false) {
             $id = $resultat['ID_USER'];
             $nom = $resultat['NOM_USER'];

@@ -81,8 +81,8 @@ class Connexion {
             } catch (Exception $e) {
                 $e->getMessage();
             }
-            return self::$instance;
         }
+        return self::$instance;
     }
 
     public function __clone() {
