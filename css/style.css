@@ -1,0 +1,25 @@
+body {
+    width : 940px;
+    margin: 0;
+}
+
+header {
+    background-color: blue;
+    height : 200px;
+}
+section {
+    min-height: 200px;
+}
+
+footer {
+    background-color: red;
+    height : 200px;
+}
+
+#contenu {
+    position :relative;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
