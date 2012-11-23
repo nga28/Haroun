@@ -8,7 +8,7 @@ require_once 'models/Membres.php';
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title></title>
         <!--.<link href ="css/style.css" rel ="stylesheet" type ="text/css" />-->
-        <script type="text/javascript" src="js/jquery-1.8.2.js"></script>
+        <script type="text/javascript" src="jquery-ui-1.9/js/jquery-1.8.2.js"></script>
     </head>
     <body>
         <div id ="contenu ">
@@ -23,7 +23,6 @@ require_once 'models/Membres.php';
                 <?php
                     } else {
                         $membre = unserialize($_SESSION['membre']);
-//                        echo $membre;
                         if($membre->getQualite() == 'BO') {
                ?>
                             <a href ="index.php?page=Administration">Administration</a>
