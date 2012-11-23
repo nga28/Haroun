@@ -53,11 +53,11 @@
 				<legend>Email</legend>
 				<label>
 					<span>Email  : </span>
-					<input class="validate[required,custom[email]] text-input" type="text" name="email" id="email"  />
+					<input class="validate[required,custom[email]] text-input" type="text" name="mail" id="email"  />
 				</label>
 				<label>
 					<span>Confirmation email : </span>
-					<input class="validate[required,confirm[email]] text-input" type="text" name="email2"  id="email2" />
+					<input class="validate[required,confirm[email]] text-input" type="text" name="mail2"  id="email2" />
 				</label>
 			</fieldset>
 			<fieldset>
