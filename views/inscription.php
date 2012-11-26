@@ -12,7 +12,7 @@
 
 	</head>
 	<body>
-		<form id="formID" class="formular" method="post" action="">
+		<form id="formID" class="formular" method="post" action="index.php?page=Inscription">
 			<fieldset>
 				<legend>Utilisateur</legend>
 				<label>
@@ -31,10 +31,6 @@
 				</label>
 		!-->		
 				
-				<label>
-					<span>Age : </span>
-					<input class="validate[required,custom[onlyNumber],length[0,3]] text-input" type="text" name="age"  id="age" />
-				</label>
 					
 				
 			</fieldset>
@@ -55,10 +51,7 @@
 					<span>Email  : </span>
 					<input class="validate[required,custom[email]] text-input" type="text" name="mail" id="email"  />
 				</label>
-				<label>
-					<span>Confirmation email : </span>
-					<input class="validate[required,confirm[email]] text-input" type="text" name="mail2"  id="email2" />
-				</label>
+				
 			</fieldset>
 			<fieldset>
 				

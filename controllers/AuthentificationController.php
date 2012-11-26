@@ -12,6 +12,7 @@
  */
 require_once 'models/Membres.php';
 require_once 'models/User.php';
+require_once 'models/Admin.php';
 require_once 'models/Connexion.php';
 require_once 'Controller.php';
 
@@ -41,19 +42,14 @@ class AuthentificationController extends Controller{
         $membres = new Membres($_POST['mail'], $_POST['mdp']);
         $resultat = $membres->authentification(parent::getCnx());
         if($resultat != false) {
-            $id = $resultat['ID_USER'];
-            $nom = $resultat['NOM_USER'];
-            $prenom = $resultat['PRENOM_USER'];
-            $adresse = $resultat['ADRESSE_USER'];
-            $cp = $resultat['CP_USER'];
-            $ville = $resultat['VILLE_USER'];
-            $mail = $resultat['MAIL_USER'];
-            $mdp = $resultat['MDP_USER'];
-            $ip = $resultat['IP'];
-            $qualite = $resultat['QUALITE'];
-            $object_membre = new Membres($mail, $mdp, $id, $ip, $nom, $prenom, $adresse, $cp, $ville, $qualite);
+            if($resultat['QUALITE'] == 'BO') {
+                $object_membre = new Admin($resultat['MAIL_USER'], $resultat['MDP_USER'], $resultat['ID_USER'], $resultat['IP'], $resultat['NOM_USER'], $resultat['PRENOM_USER'], $resultat['ADRESSE_USER'], $resultat['CP_USER'], $resultat['VILLE_USER'], $resultat['QUALITE']);
+            } else {
+                $object_membre = new Membres($resultat['MAIL_USER'], $resultat['MDP_USER'], $resultat['ID_USER'], $resultat['IP'], $resultat['NOM_USER'], $resultat['PRENOM_USER'], $resultat['ADRESSE_USER'], $resultat['CP_USER'], $resultat['VILLE_USER'], $resultat['QUALITE']);
+            }
             $obj_serialise = serialize($object_membre);
             $_SESSION['membre'] = $obj_serialise;
+            $_SESSION['idMembre'] = $resultat['ID_USER'];
             header('Location: index.php');
         }
             

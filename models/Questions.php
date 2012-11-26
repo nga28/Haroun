@@ -22,6 +22,19 @@ class Questions {
         $this->type = $type;
     }
     
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getLibelle() {
+        return $this->libelle;
+    }
+
+    public function getType() {
+        return $this->type;
+    }
+
+        
     public function ajouterQuestions($cnx) {
         $requete = "INSERT INTO questions (ID_SONDAGE,LIBELLE_QUESTION,TYPE_SONDAGE) VALUES (?,?,?)";
         $cmd = $cnx->prepare($requete);
@@ -31,7 +44,16 @@ class Questions {
         if($cmd->execute())
             return true;
     }
-
+    
+    public function supprimerQuestion($cnx) {
+        $requete = "DELETE FROM questions WHERE ID_QUESTION = ?";
+        $cmd = $cnx->prepare($requete);
+        $cmd->bindValue(1, $this->id, PDO::PARAM_INT);
+        if($cmd->execute())
+            return true;
+    }
+    
+    
     
 }
 

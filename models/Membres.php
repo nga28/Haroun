@@ -10,7 +10,6 @@
  *
  * @author Naïm Attoumane
  */
-require_once("models/Connexion.php");
 require_once("models/User.php");
 
 class Membres extends User{
@@ -24,7 +23,6 @@ class Membres extends User{
     private $qualite;
     private $mail;
     private $mdp;
-    private $mesSondages = array();
     
     function __construct($mail="", $mdp="",$id = "",$ip = "", $nom = "", $prenom ="", $adresse = "", $cp = "", $ville = "", $qualite = "") {
         parent::__construct($ip);
@@ -86,14 +84,14 @@ class Membres extends User{
     public function recupererMesSondages($cnx) {
         $tabSondage = array();
         $id = $this->id;
-        $requeteMail = "SELECT ID_SONDAGE , NOM_SONDAGE , TYPE_SONDAGE , DATE_CLOTURE , ETAT_SONDAGE FROM sondage WHERE ID_USER = ? ORDER BY NOM_SONDAGE";
+        $requeteMail = "SELECT ID_SONDAGE , NOM_SONDAGE , TYPE_SONDAGE , DATE_CLOTURE , ETAT_SONDAGE , URL , STATUT FROM sondage WHERE ID_USER = ? ORDER BY NOM_SONDAGE";
         $cmd = $cnx->prepare($requeteMail);
         $cmd->bindParam(1, $id ,PDO::PARAM_STR);
         $cmd->execute();
         
         if ($cmd->setFetchMode(PDO::FETCH_ASSOC)) {
             foreach ($cmd as $enr) {
-                $sondage = new Sondage($enr['NOM_SONDAGE'],$enr['TYPE_SONDAGE'],$enr['ID_SONDAGE'],$enr['DATE_CLOTURE'],$enr['ETAT_SONDAGE']);
+                $sondage = new Sondage($enr['NOM_SONDAGE'],$enr['TYPE_SONDAGE'],$enr['ID_SONDAGE'],$enr['DATE_CLOTURE'],$enr['ETAT_SONDAGE'],$enr['URL'],$enr['STATUT']);
                 array_push($tabSondage, $sondage);
             }
             return $tabSondage;

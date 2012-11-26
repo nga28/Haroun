@@ -14,6 +14,9 @@ if(isset($_GET['page'])) {
     $mainController = new Controller($page);
     $controller = $mainController->getPageController();
     switch ($page) {
+    case 'AdministrationController' :
+        echo $controller->getSondages();
+        break;
     case 'AuthentificationController' :
         $controller->loginController();
         if($controller->verificationChamps() == 0) {
@@ -61,9 +64,11 @@ if(isset($_GET['page'])) {
         echo $controller->getMesSondages();
         break;
     case 'QuestionsController' :
-        if(isset($_REQUEST['tab'])) {
-            $controller->sendQuestions($_REQUEST['tab']);
-        }
+        echo $controller->getQuestionsFromBD();
+        $controller->afficherFormulaire();
+        break;
+    case 'StatistiquesController' :
+        $controller->afficherPage();
         break;
     case 'DefaultController' :
         $controller->test();

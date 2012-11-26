@@ -11,6 +11,7 @@
  * @author Naïm Attoumane
  */
 require_once 'models/Sondage.php';
+require_once 'models/Sujet.php';
 
 class SondageController extends Controller {
     //put your code here
@@ -36,9 +37,15 @@ class SondageController extends Controller {
     
     public function enregistrerSondage() {
         $sondage = new Sondage($_POST['nom'],$_POST['type']);
-        $sondage->validerSondage(parent::getCnx());
+        $sondage->validerSondage(parent::getCnx(),$_POST['sujet']);
     }
-            
+    
+    public function getSujet() {
+        $sujet = new Sujet();
+        return $sujet->getSujet(parent::getCnx());
+        
+    }
+    
 
 }
 

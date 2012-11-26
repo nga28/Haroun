@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Ven 23 Novembre 2012 à 11:25
+-- Généré le: Lun 26 Novembre 2012 à 15:10
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -28,13 +28,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `membre` (
   `ID_USER` int(11) NOT NULL,
-  `NOM_USER` text NOT NULL,
-  `PRENOM_USER` text NOT NULL,
-  `ADRESSE_USER` text NOT NULL,
-  `CP_USER` text NOT NULL,
-  `VILLE_USER` text NOT NULL,
-  `MAIL_USER` text NOT NULL,
-  `MDP_USER` text NOT NULL,
+  `NOM_USER` varchar(50) NOT NULL,
+  `PRENOM_USER` varchar(50) NOT NULL,
+  `ADRESSE_USER` varchar(250) NOT NULL,
+  `CP_USER` varchar(5) NOT NULL,
+  `VILLE_USER` varchar(50) NOT NULL,
+  `MAIL_USER` varchar(250) NOT NULL,
+  `MDP_USER` varchar(50) NOT NULL,
   `QUALITE` varchar(2) DEFAULT NULL,
   `IP` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`ID_USER`),
@@ -59,19 +59,23 @@ INSERT INTO `membre` (`ID_USER`, `NOM_USER`, `PRENOM_USER`, `ADRESSE_USER`, `CP_
 
 CREATE TABLE IF NOT EXISTS `questions` (
   `ID_QUESTION` int(11) NOT NULL AUTO_INCREMENT,
-  `ID_SONDAGE` int(11) NOT NULL,
-  `LIBELLE_QUESTION` text NOT NULL,
+  `ID_SONDAGE` int(11) DEFAULT NULL,
+  `LIBELLE_QUESTION` varchar(750) DEFAULT NULL,
   `TYPE_SONDAGE` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ID_QUESTION`),
-  KEY `FK_CONTENNIR` (`ID_SONDAGE`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  KEY `ce_questions_sondage` (`ID_SONDAGE`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
 
 --
 -- Contenu de la table `questions`
 --
 
 INSERT INTO `questions` (`ID_QUESTION`, `ID_SONDAGE`, `LIBELLE_QUESTION`, `TYPE_SONDAGE`) VALUES
-(6, 24, 'xdzdcz', 0);
+(29, 62, 'FCGB', 1),
+(30, 62, 'OM', 1),
+(31, 62, 'PSG', 1),
+(32, 62, 'OL', 1),
+(33, 62, 'LOSC', 1);
 
 -- --------------------------------------------------------
 
@@ -80,15 +84,40 @@ INSERT INTO `questions` (`ID_QUESTION`, `ID_SONDAGE`, `LIBELLE_QUESTION`, `TYPE_
 --
 
 CREATE TABLE IF NOT EXISTS `reponse` (
-  `ID_REPONSE` int(11) NOT NULL,
-  `ID_QUESTION` int(11) NOT NULL,
-  `ID_STATS` int(11) NOT NULL,
-  `LIBELLE_REPONSE` longtext NOT NULL,
-  `REPONSE_QUESTION` longtext,
+  `ID_REPONSE` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_QUESTION` int(11) DEFAULT NULL,
+  `ID_USER` int(11) DEFAULT NULL,
+  `REPONSE` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`ID_REPONSE`),
-  KEY `FK_APPARTENIR` (`ID_STATS`),
-  KEY `FK_POSSEDER` (`ID_QUESTION`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `ce_reponse_user` (`ID_USER`),
+  KEY `ce_reponse_questions` (`ID_QUESTION`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+
+--
+-- Contenu de la table `reponse`
+--
+
+INSERT INTO `reponse` (`ID_REPONSE`, `ID_QUESTION`, `ID_USER`, `REPONSE`) VALUES
+(16, 29, 2, 'OUI'),
+(17, 30, 2, 'NON'),
+(18, 31, 2, 'OUI'),
+(19, 32, 2, 'NON'),
+(20, 33, 2, 'OUI'),
+(21, 29, 2, 'OUI'),
+(22, 30, 2, 'OUI'),
+(23, 31, 2, 'NON'),
+(24, 32, 2, 'NON'),
+(25, 33, 2, 'OUI'),
+(26, 29, 2, 'OUI'),
+(27, 30, 2, 'NON'),
+(28, 31, 2, 'NON'),
+(29, 32, 2, 'NON'),
+(30, 33, 2, 'NON'),
+(31, 29, 2, 'NON'),
+(32, 30, 2, 'OUI'),
+(33, 31, 2, 'NON'),
+(34, 32, 2, 'OUI'),
+(35, 33, 2, 'NON');
 
 -- --------------------------------------------------------
 
@@ -103,37 +132,42 @@ CREATE TABLE IF NOT EXISTS `sondage` (
   `DATE_CLOTURE` date DEFAULT NULL,
   `NOM_SONDAGE` varchar(100) DEFAULT NULL,
   `ETAT_SONDAGE` tinyint(1) DEFAULT NULL,
+  `URL` varchar(500) NOT NULL,
+  `ID_SUJET` int(11) DEFAULT NULL,
+  `STATUT` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_SONDAGE`),
-  KEY `FK_CREER` (`ID_USER`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+  KEY `FK_CREER` (`ID_USER`),
+  KEY `ce_sondage_sujet` (`ID_SUJET`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
 
 --
 -- Contenu de la table `sondage`
 --
 
-INSERT INTO `sondage` (`ID_SONDAGE`, `ID_USER`, `TYPE_SONDAGE`, `DATE_CLOTURE`, `NOM_SONDAGE`, `ETAT_SONDAGE`) VALUES
-(10, 2, 0, NULL, 'azz', 1),
-(11, 2, 1, NULL, 'rvvsv', 1),
-(13, 2, 0, NULL, '0', NULL),
-(14, 2, 0, NULL, 'ddd', NULL),
-(15, 2, 0, NULL, 'test22', NULL),
-(20, 3, 1, NULL, 'efzfz', 1),
-(21, 3, 0, NULL, 'eqzf', 1),
-(22, 3, 0, NULL, 'TEST', NULL),
-(23, 3, 0, NULL, 'AZERTY', 1),
-(24, 3, 1, NULL, 'lol', NULL);
+INSERT INTO `sondage` (`ID_SONDAGE`, `ID_USER`, `TYPE_SONDAGE`, `DATE_CLOTURE`, `NOM_SONDAGE`, `ETAT_SONDAGE`, `URL`, `ID_SUJET`, `STATUT`) VALUES
+(62, 2, 0, '2012-11-26', 'TEST', 1, 'sondages/TEST_62.php', 1, 4);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `stats`
+-- Structure de la table `sujet`
 --
 
-CREATE TABLE IF NOT EXISTS `stats` (
-  `ID_STATS` int(11) NOT NULL,
-  `DATE_STATS` date NOT NULL,
-  PRIMARY KEY (`ID_STATS`)
+CREATE TABLE IF NOT EXISTS `sujet` (
+  `ID_SUJET` int(11) NOT NULL DEFAULT '0',
+  `LIBELLE_SUJET` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`ID_SUJET`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `sujet`
+--
+
+INSERT INTO `sujet` (`ID_SUJET`, `LIBELLE_SUJET`) VALUES
+(1, 'Football'),
+(2, 'Musique'),
+(3, 'Politique'),
+(4, 'Jeux Videos');
 
 -- --------------------------------------------------------
 
@@ -143,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `stats` (
 
 CREATE TABLE IF NOT EXISTS `user` (
   `ID_USER` int(11) NOT NULL,
-  `IP` text NOT NULL,
+  `IP` varchar(15) NOT NULL,
   PRIMARY KEY (`ID_USER`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -167,7 +201,9 @@ INSERT INTO `user` (`ID_USER`, `IP`) VALUES
 (16, '127.0.0.1'),
 (17, '127.0.0.1'),
 (18, '127.0.0.1'),
-(19, '127.0.0.1');
+(19, '127.0.0.1'),
+(20, '127.0.0.1'),
+(21, '127.0.0.1');
 
 --
 -- Contraintes pour les tables exportées
@@ -183,19 +219,20 @@ ALTER TABLE `membre`
 -- Contraintes pour la table `questions`
 --
 ALTER TABLE `questions`
-  ADD CONSTRAINT `FK_CONTENNIR` FOREIGN KEY (`ID_SONDAGE`) REFERENCES `sondage` (`ID_SONDAGE`);
+  ADD CONSTRAINT `ce_questions_sondage` FOREIGN KEY (`ID_SONDAGE`) REFERENCES `sondage` (`ID_SONDAGE`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `reponse`
 --
 ALTER TABLE `reponse`
-  ADD CONSTRAINT `FK_APPARTENIR` FOREIGN KEY (`ID_STATS`) REFERENCES `stats` (`ID_STATS`),
-  ADD CONSTRAINT `FK_POSSEDER` FOREIGN KEY (`ID_QUESTION`) REFERENCES `questions` (`ID_QUESTION`);
+  ADD CONSTRAINT `ce_reponse_questions` FOREIGN KEY (`ID_QUESTION`) REFERENCES `questions` (`ID_QUESTION`) ON DELETE CASCADE,
+  ADD CONSTRAINT `ce_reponse_user` FOREIGN KEY (`ID_USER`) REFERENCES `user` (`ID_USER`);
 
 --
 -- Contraintes pour la table `sondage`
 --
 ALTER TABLE `sondage`
+  ADD CONSTRAINT `ce_sondage_sujet` FOREIGN KEY (`ID_SUJET`) REFERENCES `sujet` (`ID_SUJET`),
   ADD CONSTRAINT `FK_CREER` FOREIGN KEY (`ID_USER`) REFERENCES `membre` (`ID_USER`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

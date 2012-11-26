@@ -10,12 +10,18 @@
  *
  * @author Naïm Attoumane
  */
-class AddQuestionController {
+require_once 'controllers/Controller.php';
+require_once 'models/Sondage.php';
+require_once 'models/Connexion.php';
+
+class AddQuestionController extends Controller {
     //put your code here
+            
     function __construct() {
-        include 'views/questions.php';
+        $question = new Questions($_SESSION['id'],$_REQUEST['q']['libelle'],$_REQUEST['q']['type']);
+        $question->ajouterQuestions(Connexion::seConnecter("mysql", "localhost", "sondage", "root", ""));
     }
-    
+   
 }
 
 ?>
