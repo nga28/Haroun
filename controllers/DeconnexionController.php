@@ -11,16 +11,16 @@
  * @author Naïm Attoumane
  */
 require_once 'models/Membres.php';
-
+//CONTROLLER DECONNEXION
 class DeconnexionController extends Controller{
     //put your code here
     function __construct() {
         
     }
-    
+    //FONCTION DECONNEXION
     public function getDeconnexion() {
         Membres::deconnexion();
-        header('Location: index.php');
+        header('Location: index.php?page=Default');
     }
 }
 

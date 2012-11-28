@@ -10,14 +10,16 @@
  *
  * @author Naïm Attoumane
  */
+//CONTROLLER PAR DEFAUT
+
 class DefaultController extends Controller{
     //put your code here
     function __construct() {
         
     }
-
-    public function test() {
-        echo "ok";
+    //AFFICHAGE DE LA PAGE ACCUEIL
+    public function afficherPage() {
+        include('views/accueil.php');
     }
 }
 

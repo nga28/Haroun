@@ -4,15 +4,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+//INCLUSION DU CONTROLLER PRINCIPAL
 require_once 'controllers/Controller.php';
 
-
+//SI LA VARIABLE PAGE EST INITIALISEE ON INSTANCIE LE CONTROLLER SPECIFIQUE
 if(isset($_GET['page'])) {
     $page = $_GET['page'];
     $page .= "Controller";
     //Controller
     $mainController = new Controller($page);
     $controller = $mainController->getPageController();
+    //SELON LE CONTROLLER QUE L'ON INSTANCIE ON EXECUTE LES METHODES DONT ON A BESOIN
     switch ($page) {
     case 'AdministrationController' :
         echo $controller->getSondages();
@@ -43,7 +45,7 @@ if(isset($_GET['page'])) {
                 break;
             case 2 :
                 if($controller->verificationInscription() == 1) {
-
+                    header('Location : index.php');
                 } else if ($controller->verificationInscription() == 0) {
                     echo "Vous etes deja inscris";
                 } else {
@@ -68,11 +70,10 @@ if(isset($_GET['page'])) {
         $controller->afficherFormulaire();
         break;
     case 'StatistiquesController' :
-        $controller->afficherPage();
+        echo $controller->afficherPage();
         break;
     case 'DefaultController' :
-        $controller->test();
-        echo "rrrr";
+        $controller->afficherPage();
         break;
     }
 }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 26 Novembre 2012 à 15:10
+-- Généré le: Mer 28 Novembre 2012 à 12:14
 -- Version du serveur: 5.5.24-log
 -- Version de PHP: 5.4.3
 
@@ -49,7 +49,10 @@ INSERT INTO `membre` (`ID_USER`, `NOM_USER`, `PRENOM_USER`, `ADRESSE_USER`, `CP_
 (1, 'TEST', 'test', '3 rue du test', '75001', 'Paris', 'test@test.fr', 'test', 'FO', '127.0.0.1'),
 (2, 'ADMIN', 'Admin', '3 rue Admin', '75002', 'Paris', 'admin@admin.fr', 'admin', 'BO', '127.0.0.1'),
 (3, 'a', 'a', 'a', '93100', 'Montreuil', 'a@a.fr', 'a', 'FO', '127.0.0.1'),
-(7, 'a', 'a', 'a', '93100', 'Montreuil', 'a@a.frsssss', 'a', 'FO', '127.0.0.1');
+(7, 'a', 'a', 'a', '93100', 'Montreuil', 'a@a.frsssss', 'a', 'FO', '127.0.0.1'),
+(22, 'a', 'evv', 'zzzz', '87982', 'gbrvege', 'zzz@zzz.zz', 'zzzzzzz', 'FO', '127.0.0.1'),
+(23, 'ZZZZZZ', 'ZZZZZ', 'zzzz', '84871', 'zzzzzzzzz', 'ZZZZZZZ@ZZZZZ.FR', 'ZZZZZZZZZZ', 'FO', '127.0.0.1'),
+(24, 'Lahideb', 'Abdel', 'rue ', '75001', 'PARIS', 'l.abdel@a.fr', 'abdell', 'FO', '127.0.0.1');
 
 -- --------------------------------------------------------
 
@@ -64,18 +67,27 @@ CREATE TABLE IF NOT EXISTS `questions` (
   `TYPE_SONDAGE` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`ID_QUESTION`),
   KEY `ce_questions_sondage` (`ID_SONDAGE`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=39 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=127 ;
 
 --
 -- Contenu de la table `questions`
 --
 
 INSERT INTO `questions` (`ID_QUESTION`, `ID_SONDAGE`, `LIBELLE_QUESTION`, `TYPE_SONDAGE`) VALUES
-(29, 62, 'FCGB', 1),
-(30, 62, 'OM', 1),
-(31, 62, 'PSG', 1),
-(32, 62, 'OL', 1),
-(33, 62, 'LOSC', 1);
+(110, 72, 'AZERTY', 0),
+(111, 72, 'SSS', 2),
+(112, 72, 'SQC', 1),
+(114, 72, 'EDZECCE', 0),
+(115, 72, '[', 0),
+(116, 73, 'QDCCQ', 0),
+(119, 73, 'sqcq', 1),
+(120, 73, 'sdq qs', 2),
+(121, 73, 'eaccaqecae', 1),
+(122, 74, 'Avez-vous BeInSport ?', 1),
+(123, 74, 'Avez-vous Canal + ?', 1),
+(124, 74, 'Combien de matchs regardez-vous la L1 ?', 2),
+(125, 74, 'Quel est votre championnat prefere ?', 0),
+(126, 74, 'Quelle est votre équipe ? ', 0);
 
 -- --------------------------------------------------------
 
@@ -91,33 +103,23 @@ CREATE TABLE IF NOT EXISTS `reponse` (
   PRIMARY KEY (`ID_REPONSE`),
   KEY `ce_reponse_user` (`ID_USER`),
   KEY `ce_reponse_questions` (`ID_QUESTION`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=86 ;
 
 --
 -- Contenu de la table `reponse`
 --
 
 INSERT INTO `reponse` (`ID_REPONSE`, `ID_QUESTION`, `ID_USER`, `REPONSE`) VALUES
-(16, 29, 2, 'OUI'),
-(17, 30, 2, 'NON'),
-(18, 31, 2, 'OUI'),
-(19, 32, 2, 'NON'),
-(20, 33, 2, 'OUI'),
-(21, 29, 2, 'OUI'),
-(22, 30, 2, 'OUI'),
-(23, 31, 2, 'NON'),
-(24, 32, 2, 'NON'),
-(25, 33, 2, 'OUI'),
-(26, 29, 2, 'OUI'),
-(27, 30, 2, 'NON'),
-(28, 31, 2, 'NON'),
-(29, 32, 2, 'NON'),
-(30, 33, 2, 'NON'),
-(31, 29, 2, 'NON'),
-(32, 30, 2, 'OUI'),
-(33, 31, 2, 'NON'),
-(34, 32, 2, 'OUI'),
-(35, 33, 2, 'NON');
+(76, 122, 2, 'OUI'),
+(77, 123, 2, 'NON'),
+(78, 124, 2, '10'),
+(79, 125, 2, 'L1'),
+(80, 126, 2, 'FCGB'),
+(81, 122, 2, 'OUI'),
+(82, 123, 2, 'OUI'),
+(83, 124, 2, '5'),
+(84, 125, 2, 'PREMIER LEAGUE'),
+(85, 126, 2, 'man utd');
 
 -- --------------------------------------------------------
 
@@ -138,14 +140,16 @@ CREATE TABLE IF NOT EXISTS `sondage` (
   PRIMARY KEY (`ID_SONDAGE`),
   KEY `FK_CREER` (`ID_USER`),
   KEY `ce_sondage_sujet` (`ID_SUJET`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=75 ;
 
 --
 -- Contenu de la table `sondage`
 --
 
 INSERT INTO `sondage` (`ID_SONDAGE`, `ID_USER`, `TYPE_SONDAGE`, `DATE_CLOTURE`, `NOM_SONDAGE`, `ETAT_SONDAGE`, `URL`, `ID_SUJET`, `STATUT`) VALUES
-(62, 2, 0, '2012-11-26', 'TEST', 1, 'sondages/TEST_62.php', 1, 4);
+(72, 2, 0, NULL, 'TEST', 1, 'sondages/TEST_72.php', 1, 0),
+(73, 2, 0, NULL, 'ASDZEFFEF', NULL, '', 1, 0),
+(74, 2, 0, '2012-11-28', 'TV', 1, 'sondages/TV_74.php', 1, 4);
 
 -- --------------------------------------------------------
 
@@ -203,7 +207,10 @@ INSERT INTO `user` (`ID_USER`, `IP`) VALUES
 (18, '127.0.0.1'),
 (19, '127.0.0.1'),
 (20, '127.0.0.1'),
-(21, '127.0.0.1');
+(21, '127.0.0.1'),
+(22, '127.0.0.1'),
+(23, '127.0.0.1'),
+(24, '127.0.0.1');
 
 --
 -- Contraintes pour les tables exportées

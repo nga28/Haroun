@@ -1,96 +1,203 @@
 body{ margin:0; padding:0;}
 
 form.formular {
-	font-family: tahoma, verdana, "sans-serif";
-	font-size: 12px;
-	padding: 20px;
-	border: 1px solid #A5A8B8;
-	width:450px;
-	margin: 0 auto;
+    font-family: tahoma, verdana, "sans-serif";
+    font-size: 12px;
+    padding: 20px;
+    border: 1px solid #A5A8B8;
+    width:450px;
+    margin: 0 auto;
 }
 
 .formular fieldset {
-	margin-top: 20px;
-	padding : 15px;
-	border: 1px solid #B5B8C8;
-	
+    margin-top: 20px;
+    padding : 15px;
+    border: 1px solid #B5B8C8;
+
 }
 
 .formular legend {
-	font-size: 12px;
-	color: #15428B;
-	font-weight: 900;
+    font-size: 12px;
+    color: #15428B;
+    font-weight: 900;
 }
 
 .formular fieldset label {
-	float: none;
-	text-align: inherit;
-	width: auto;
+    float: none;
+    text-align: inherit;
+    width: auto;
 }
 
 .formular label span {
-	color: #000;
+    color: #000;
 }
 
 .formular input, .formular select, .formular textarea {
-	display : block;
-	margin-bottom: 5px;
+    display : block;
+    margin-bottom: 5px;
 }
 
 .formular .text-input {
-	width: 250px;
-	color: #555;
-	padding: 4px;
-	border: 1px solid #B5B8C8;
-	font-size: 14px;
-	margin-top: 4px;
-	background: #FFF url('/img/form/text-bg.gif') repeat-x;
-	
+    width: 250px;
+    color: #555;
+    padding: 4px;
+    border: 1px solid #B5B8C8;
+    font-size: 14px;
+    margin-top: 4px;
+    background: #FFF url('/img/form/text-bg.gif') repeat-x;
+
 }
 .formular textarea {
-	width: 250px;
-	height:70px;
-	color: #555;
-	padding: 4px;
-	border: 1px solid #B5B8C8;
-	font-size: 14px;
-	margin-top: 4px;
-	background: #FFF url('/img/form/text-bg.gif') repeat-x;
-	
+    width: 250px;
+    height:70px;
+    color: #555;
+    padding: 4px;
+    border: 1px solid #B5B8C8;
+    font-size: 14px;
+    margin-top: 4px;
+    background: #FFF url('/img/form/text-bg.gif') repeat-x;
+
 }
 .formular .infos {
-	background: #FFF;
-	color: #333;
-	font-size: 12px;
-	padding: 10px;
-	margin-bottom: 10px;
+    background: #FFF;
+    color: #333;
+    font-size: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .formular span.checkbox, .formular .checkbox {
-	display: inline;
+    display: inline;
 }
 
 .formular .submit {
-	background: url('/img/form/button-bg.png') repeat-x;
-	border: 1px solid #AAA;
-	padding: 4px;
-	margin-top: 20px;
-	float: right;
-	text-decoration: none;
-	cursor:pointer;
+    background: url('/img/form/button-bg.png') repeat-x;
+    border: 1px solid #AAA;
+    padding: 4px;
+    margin-top: 20px;
+    float: right;
+    text-decoration: none;
+    cursor:pointer;
 }
 
 .formular hr {
-	clear: both;
-	visibility: hidden;
+    clear: both;
+    visibility: hidden;
 }
 
 .formular .fc-error {
-	width: 350px;
-	color: 555;
-	padding: 4px;
-	border: 1px solid #B5B8C8;
-	font-size: 12px;
-	margin-bottom: 15px;
-	background: #FFEAEA;
+    width: 350px;
+    color: 555;
+    padding: 4px;
+    border: 1px solid #B5B8C8;
+    font-size: 12px;
+    margin-bottom: 15px;
+    background: #FFEAEA;
+}
+
+#espace {
+    margin-bottom:35px;
+}
+
+#piedPage {
+    margin-top:15px;
+    text-align: center;
+    font-weight: bold;
+    font-size : 10px;
+}
+
+#page-wrap {
+	min-width: 960px; max-width: 1260px;
+	margin: 0 auto; padding: 0 10px;
+	width:expression(document.body.clientWidth < 961? "960px" : document.body.clientWidth > 1261? "1260px" : "auto");
+}
+
+#top-bar {
+	background: #1b5790; /* Digg Blue */
+	min-height: 55px;
+	padding: 0 10px;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+#zone-bar {
+	background: #b2d281;
+	min-height: 30px;
+	padding: 5px 10px 0 10px;
+}
+
+#zone-bar ul {
+	display: block;
+}
+
+#zone-bar ul li {
+	height: 18px;
+	padding: 5px 5px 0 5px;
+	position: relative;
+	float: left;
+	margin-right: 10px;
+}
+
+#zone-bar ul li:hover {
+	background: url(../img/zonebar-navleft.png) center left no-repeat;
+}
+
+#zone-bar ul li a {
+	display: block;
+	float: left;
+	height: 23px;
+	position: relative;
+	top: -5px;
+	right: -5px;
+	padding-right: 3px;
+	color: #383838;
+	font-weight: bold;
+	font-size: 1.1em;
+	text-decoration: none;
+}
+
+#zone-bar ul li a:hover {
+	background: url(../img/zonebar-navright.png) center right no-repeat;
+}
+	
+#zone-bar ul li a span {
+	position: relative;
+	top: 6px;
+}
+
+#zone-bar ul li ul {
+	display: none;
+	position: absolute;
+	top: 29px;
+	left: 0px;
+	width: 150px;
+	border: 1px solid #ccc;
+	background: white;
+	padding: 10px 0 0 0;
+}
+	
+#zone-bar ul li ul li {
+	float: none;
+	padding: 0; margin: 0;
+	height: 100%;
+}
+
+#zone-bar ul li ul li:hover {
+	background: none;
+}
+		
+#zone-bar ul li ul li a {
+	display: block;
+	float: none;
+	margin-left: -5px;
+	padding: 5px 0 0 10px;
+	width: 140px;
+}
+		
+#zone-bar ul li ul li a:hover {
+	background: #d9f0b7;
+}
+
+#cadre {
+  border-radius: 5px 10px 0 5px;
 }

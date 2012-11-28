@@ -122,16 +122,30 @@ class Sondage {
             return true;
     }
     
-    private function formaterDateMysql() {
-        $tab = explode('.', date("m.d.Y"));
-        return $tab[2]."-".$tab[0]."-".$tab[1];
+    private function formaterDate($date) {
+        $tab = explode('-', $date);
+        return $tab[2]."/".$tab[1]."/".$tab[0];
     }
     
+    //CREER LE FICHIER DE SONDAGE DANS LE REPERTOIRE SONDAGE 
     private function creerFichier($nomFichier) {
         $leFichier = fopen("./sondages/".$nomFichier.".php", "wb");
         fclose($leFichier);
         $fp = fopen("./sondages/".$nomFichier.".php","w"); // ouverture du fichier en écriture
         $str = "";
+        $str2 = "";
+        $str2 .= "<html>
+            <head>
+                <script type='text/javascript' src='../jquery-ui-1.9.1/js/jquery-1.8.2.js'></script>
+                <script type='text/javascript' src='../jquery-ui-1.9.1/js/jquery.js'></script>
+                <script type='text/javascript' src='../jquery-ui-1.9.1/js/jquery.validationEngine-fr.js'></script>
+                <script type='text/javascript' src='../jquery-ui-1.9.1/js/jquery.validationEngine.js'></script>
+                <link rel='stylesheet' href='../css/template.css' type='text/css' media='screen' title='no title' charset='utf-8' />
+                <link rel='stylesheet' href='../css/validationEngine.jquery.css' type='text/css' media='screen' title='no title' charset='utf-8' />
+                <link rel='stylesheet' href='../css/style.css' type='text/css' media='screen' title='no title' charset='utf-8' />
+                <link href='../css/button.css' rel='stylesheet' type='text/css'>
+            </head>";
+        fputs($fp,$str2);
         fputs($fp, "<?php \n"); 
         $str.= "require_once '../controllers/CreerURLSondageController.php'; \n";
         $str.= '$controller = new CreerURLSondageController("'.$nomFichier.'");';
@@ -139,6 +153,7 @@ class Sondage {
         $str.= 'if(isset($_POST["valider"])) { if($controller->verificationChamps()) $controller->validerSondage(); else echo "Veuillez renseigner tous les champs"; }';
         fputs($fp,$str);
         fputs($fp, "?>"); 
+        $str .= "</html>";
         fclose($fp);  
     }
     
@@ -153,6 +168,8 @@ class Sondage {
             }
         }
     }
+    
+    //retourne les questions du sondage
     public static function getQuestions($cnx,$id) {
         $tabQuestions = array();
         $requete = "SELECT ID_QUESTION, LIBELLE_QUESTION , TYPE_SONDAGE FROM questions WHERE `ID_SONDAGE` = ?";

@@ -7,7 +7,6 @@
                 <link rel='stylesheet' href='../css/template.css' type='text/css' media='screen' title='no title' charset='utf-8' />
                 <link rel='stylesheet' href='../css/validationEngine.jquery..css' type='text/css' media='screen' title='no title' charset='utf-8' />
                 <link href='../css/button.css' rel='stylesheet' type='text/css'>
-            </head>
-                <?php 
+            </head><?php 
 require_once '../controllers/CreerURLSondageController.php'; 
-$controller = new CreerURLSondageController("TEST_62");echo $controller->genererSondage();if(isset($_POST["valider"])) { if($controller->verificationChamps()) $controller->validerSondage(); else echo "Veuillez renseigner tous les champs"; }?>
+$controller = new CreerURLSondageController("dhdt_65");echo $controller->genererSondage();if(isset($_POST["valider"])) { if($controller->verificationChamps()) $controller->validerSondage(); else echo "Veuillez renseigner tous les champs"; }?>

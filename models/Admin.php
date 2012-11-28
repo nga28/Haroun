@@ -16,6 +16,7 @@ class Admin extends Membres{
     //put your code here
     private static $instance;
     
+    //CONSTRUCTEUR DE LA CLASSE ADMIN SINGLETON
     function __construct($mail="", $mdp="",$id = "",$ip = "", $nom = "", $prenom ="", $adresse = "", $cp = "", $ville = "", $qualite = "") {
         
         if (!isset(self::$instance)) {
@@ -25,6 +26,7 @@ class Admin extends Membres{
         return self::$instance;
     }
     
+    //RETOURNE TABLEAU DES SONDAGES DE LA BDD
     public function administrationSondages($cnx) {
         $tabSondage = array();
         $id = $this->id;

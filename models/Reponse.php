@@ -15,11 +15,13 @@ class Reponse {
     private $id;
     private $libelle;
     private $nb;
+    private $libelleQuestion;
     
-    function __construct($id = "", $libelle = "", $nb = "") {
+    function __construct($id = "", $libelle = "", $nb = "" , $libelleQuestion = "") {
         $this->id = $id;
         $this->libelle = $libelle;
         $this->nb = $nb;
+        $this->libelleQuestion = $libelleQuestion;
     }
     
     public function getId() {
@@ -32,6 +34,10 @@ class Reponse {
 
     public function getNb() {
         return $this->nb;
+    }
+
+    public function getLibelleQuestion() {
+        return $this->libelleQuestion;
     }
 
 

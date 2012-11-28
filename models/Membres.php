@@ -23,7 +23,7 @@ class Membres extends User{
     private $qualite;
     private $mail;
     private $mdp;
-    
+    //CONSTRUCTEUR DE LA CLASSE MEMBRE 
     function __construct($mail="", $mdp="",$id = "",$ip = "", $nom = "", $prenom ="", $adresse = "", $cp = "", $ville = "", $qualite = "") {
         parent::__construct($ip);
         $this->id = $id;
@@ -80,7 +80,7 @@ class Membres extends User{
         if($cmd->execute())
             return true;
     }
-    
+    //RETOURNE LES SONDAGES DE L'UTILISATEUR
     public function recupererMesSondages($cnx) {
         $tabSondage = array();
         $id = $this->id;

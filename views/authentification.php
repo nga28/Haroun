@@ -1,17 +1,15 @@
-
-<form name="auth" method="post" action="index.php?page=Authentification">
-    <table>
-        <tr>
-            <td>Adresse mail</td>
-            <td><input type="text" name="mail" value="" /></td>
-        </tr>
-        <tr>
-            <td>Mot de passe</td>
-            <td><input type="password" name="mdp" value="" /></td>
-        </tr>
-        <tr>
-            <td><input type="submit" value="Valider" name="valider" /></td>
-        </tr>
-    </table>
+<!--FORMULAIRE D'AUTHENTIFICATION-->
+<form id="formID" class="formular" method="post" action="index.php?page=Authentification">
+    <fieldset>
+        <legend>AUTHENTIFICATION</legend>
+        <label>
+            <span>Email  : </span>
+            <input class="validate[required,custom[email]] text-input" type="text" name="mail" id="mail"  />
+        </label>
+        <label>
+            <span>Mot de Passe : </span>
+            <input class="validate[required] text-input" type="password" name="mdp"  id="mdp" />
+            <input class="submit" type="submit" name = "valider" value="Valider" />
+        </label>
+    </fieldset>
 </form>
-

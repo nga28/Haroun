@@ -85,9 +85,6 @@ class Connexion {
         return self::$instance;
     }
 
-    public function __clone() {
-        trigger_error('Le clonage est interdit.', E_USER_ERROR);
-    }
 
 }
 

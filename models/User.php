@@ -15,7 +15,7 @@ class User {
     protected $ip;
     protected $id;
     protected $cnx;
-    
+    //CONSTRUCTEUR DE LA CLASSE PARENT
     function __construct($cnx, $verif = false, $ip = "") {
         $this->ip = $ip;
         $this->cnx = $cnx;
@@ -35,7 +35,7 @@ class User {
         return $this->cnx;
     }
 
-            
+    //GENERATION D'UN ID USER AUTOMATIQUEMENT
     public function getNewID() {
         $requeteMail = "SELECT MAX(ID_USER) AS 'max' FROM USER";
         $cmd = $this->cnx->prepare($requeteMail);

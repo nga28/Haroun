@@ -13,14 +13,14 @@
 require_once 'models/Membres.php';
 require_once 'models/User.php';
 require_once 'controllers/Controller.php';
-
+//CONTROLLER INSCRIPTION
 class InscriptionController extends Controller{
     //put your code here
     
     function __construct() {
         
     }
-
+    //AFFICHAGE DU FORMULAIRE D'INSCRIPTION
     public function inscriptionController() {
         include("views/inscription.php");
     }
@@ -42,6 +42,7 @@ class InscriptionController extends Controller{
     }
     
     public function verificationInscription() {
+        //NOUVEL UTILISATEUR AVEC IP
         $cnx = parent::getCnx();
         $user = new User($cnx,true,$_SERVER["REMOTE_ADDR"]);
         //INSCRIPTION DANS LA TABLE USER
@@ -57,6 +58,7 @@ class InscriptionController extends Controller{
         $cp = $_POST['cp'];
         $ville = $_POST['ville'];
         $qualite = "FO";
+        //NOUVEAU MEMBRE
         $membre = new Membres($mail, $mdp, $id, $ip, $nom, $prenom, $adresse, $cp, $ville, $qualite);
         if($membre->authentification($cnx) == FALSE)
             if($membre->ajouterMembre($cnx)) {
